@@ -1,0 +1,51 @@
+<?php
+
+namespace LivrariaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+
+/**
+ * Description of Produtos
+ *
+ * @author Gabriel
+ * 
+ * @ORM\Entity
+ * @ORM\Table(name="produtos")
+ */
+class Produtos 
+{
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $nome;
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantidade;
+    
+    /**
+     * @ORM\Column(type="decimal", scale=2)
+     */
+    private $preco;
+    
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $tipo;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    private  $imagem;
+    
+    
+}
