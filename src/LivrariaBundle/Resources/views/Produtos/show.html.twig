@@ -7,13 +7,11 @@
 				<div class="wrapper row">
 					<div class="preview col-md-6">
 						
-						<div class="preview-pic tab-content">
-						  <div class="tab-pane active" id="pic-1">{{ produto.imagem }}</div>
+					<div class="preview-pic tab-content">
+						  <div class="tab-pane active" id="pic-1"><img src="../img/{{produto.imagem }}" /></div>
 						  
 						</div>
-						<ul class="preview-thumbnail nav nav-tabs">
-						  
-						</ul>
+						
 						
 					</div>
 					<div class="details col-md-6">
@@ -40,11 +38,9 @@
 							<span class="color blue"></span>
 						</h5>
 						<div class="action">
-							<button class="add-to-cart btn btn-default" type="button"><a href="{{ path('produtos_index') }}">Voltar a Lista</a></button>
-							<button class="like btn btn-default" type="button"><a href="{{ path('produtos_edit', { 'id': produto.id }) }}">Editar</a></button>
-                                                        <button class="like btn btn-default" type="button"><a href="{{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}"Excluir</a></button>
+							<button class="btn btn-default" type="button"><a href="{{ path('produtos_index') }}">Voltar a Lista</a></button>
+							<button class="btn btn-default" type="button"><a href="{{ path('produtos_edit', { 'id': produto.id }) }}">Editar</a></button>
+                                                        <button class="btn btn-danger" type="button"><a href="{{ form_start(delete_form) }}Excluir</a></button>
 						</div>
 					</div>
 				</div>

@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
+
+
 {% block body %}
     <h1>Cadastrar novo Produto</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        {# {{ form_row(form.nome, {"label":"Nome do Produto"}) }} ditar form #}
+        <button class=" btn btn-default" type="submit"> Cadastrar</button> 
     {{ form_end(form) }}
 
     <ul>
