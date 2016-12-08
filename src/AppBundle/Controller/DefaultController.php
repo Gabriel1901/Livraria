@@ -11,6 +11,7 @@ class DefaultController extends Controller
 {
     /**
      * @Route("/", name="homepage")
+     * 
      */
     public function indexAction(Request $request)
     {
@@ -22,9 +23,9 @@ class DefaultController extends Controller
     
     /**
      * @Route("/email", name="email")
-     */    
-    public function emailAction()
+     */
+    public function contatoAction()
     {
-         return $this->render('default/email.html.twig');
+        return $this->render('default/email.html.twig');
     }
 }

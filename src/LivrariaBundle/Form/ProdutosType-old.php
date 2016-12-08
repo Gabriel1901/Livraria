@@ -14,7 +14,8 @@ class ProdutosType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('nome')
+        $builder
+                ->add('nome')
                 ->add('quantidade')
                 ->add('preco')
                 ->add('tipo', ChoiceType::class, array(
@@ -23,9 +24,7 @@ class ProdutosType extends AbstractType
                         "Revista" => "Revista"
                     )
                 ))
-                ->add('imagem')
-                ->add('genero')        
-                ;
+                ->add('imagem')        ;
     }
     
     /**

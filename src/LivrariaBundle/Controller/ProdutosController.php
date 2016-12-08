@@ -40,6 +40,7 @@ class ProdutosController extends Controller
     public function newAction(Request $request)
     {
         $produto = new Produtos();
+        
         $form = $this->createForm('LivrariaBundle\Form\ProdutosType', $produto);
         $form->handleRequest($request);
 
@@ -65,6 +66,7 @@ class ProdutosController extends Controller
      */
     public function showAction(Produtos $produto)
     {
+                
         $deleteForm = $this->createDeleteForm($produto);
 
         return $this->render('LivrariaBundle:Produtos:show.html.twig', array(

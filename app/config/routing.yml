@@ -4,5 +4,5 @@ livraria:
     prefix:   /
 
 #app:
-#   resource: "@AppBundle/Controller/"
-#  type:     annotation
+#    resource: "@AppBundle/Controller/"
+#    type:     annotation

@@ -7,12 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Description of Genero
  *
- * @author Gabriel
+ * @author aluno
  * 
  * @ORM\Entity
  * @ORM\Table(name="genero")
  */
-class Genero
+class Genero 
 {
     /**
      * @ORM\Column(type="integer")
@@ -22,7 +22,7 @@ class Genero
     private $id;
     
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=100)
      */
     private $nome;
 
@@ -39,7 +39,7 @@ class Genero
     /**
      * Set nome
      *
-     * @param integer $nome
+     * @param string $nome
      *
      * @return Genero
      */
@@ -53,10 +53,15 @@ class Genero
     /**
      * Get nome
      *
-     * @return integer
+     * @return string
      */
     public function getNome()
     {
         return $this->nome;
+    }
+    
+    public function __toString() 
+    {
+        return $this->id .'-'. $this->nome;
     }
 }

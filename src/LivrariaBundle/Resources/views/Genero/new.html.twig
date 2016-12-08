@@ -1,18 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% form_theme form "bootstrap_3_horizontal_layout.html.twig" %}
-
 {% block body %}
-    <h1>Cadastrar novo produto</h1>
+    <h1>Novo Genero</h1>
 
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
         {{ form_widget(form) }}
         <input type="submit" value="Create" />
     {{ form_end(form) }}
 
     <ul>
         <li>
-            <a href="{{ path('produtos_index') }}">Back to the list</a>
+            <a href="{{ path('genero_index') }}">Back to the list</a>
         </li>
     </ul>
 {% endblock %}
