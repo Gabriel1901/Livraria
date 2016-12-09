@@ -1,0 +1,183 @@
+<?php
+
+namespace LivrariaBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Description of CupomItem
+ *
+ * @ORM\Entity
+ * @ORM\Table(name="cupom_item")
+ */
+class CupomItem 
+{
+    
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+     /**
+     * @ORM\ManyToOne(targetEntity="Cupom")
+     * @ORM\JoinColumn(name="genero_id", referencedColumnName="id")
+     */
+    private $cupomId;
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $ordemItem;
+    
+    /**
+     * @ORM\Column(type="integer")
+     */    
+    private $itemCod;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $descricaoItem;
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantidade;
+    
+    /**
+     * @ORM\Column(type="decimal", scale=2)
+     */
+    private $valorUnitario;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set itemCod
+     *
+     * @param \inteiro $itemCod
+     *
+     * @return CupomItem
+     */
+    public function setItemCod(\inteiro $itemCod)
+    {
+        $this->itemCod = $itemCod;
+
+        return $this;
+    }
+
+    /**
+     * Get itemCod
+     *
+     * @return \inteiro
+     */
+    public function getItemCod()
+    {
+        return $this->itemCod;
+    }
+
+    /**
+     * Set descricaoItem
+     *
+     * @param string $descricaoItem
+     *
+     * @return CupomItem
+     */
+    public function setDescricaoItem($descricaoItem)
+    {
+        $this->descricaoItem = $descricaoItem;
+
+        return $this;
+    }
+
+    /**
+     * Get descricaoItem
+     *
+     * @return string
+     */
+    public function getDescricaoItem()
+    {
+        return $this->descricaoItem;
+    }
+
+    /**
+     * Set quantidade
+     *
+     * @param integer $quantidade
+     *
+     * @return CupomItem
+     */
+    public function setQuantidade($quantidade)
+    {
+        $this->quantidade = $quantidade;
+
+        return $this;
+    }
+
+    /**
+     * Get quantidade
+     *
+     * @return integer
+     */
+    public function getQuantidade()
+    {
+        return $this->quantidade;
+    }
+
+    /**
+     * Set valorUnitario
+     *
+     * @param string $valorUnitario
+     *
+     * @return CupomItem
+     */
+    public function setValorUnitario($valorUnitario)
+    {
+        $this->valorUnitario = $valorUnitario;
+
+        return $this;
+    }
+
+    /**
+     * Get valorUnitario
+     *
+     * @return string
+     */
+    public function getValorUnitario()
+    {
+        return $this->valorUnitario;
+    }
+
+    /**
+     * Set cupomId
+     *
+     * @param \LivrariaBundle\Entity\Cupom $cupomId
+     *
+     * @return CupomItem
+     */
+    public function setCupomId(\LivrariaBundle\Entity\Cupom $cupomId = null)
+    {
+        $this->cupomId = $cupomId;
+
+        return $this;
+    }
+
+    /**
+     * Get cupomId
+     *
+     * @return \LivrariaBundle\Entity\Cupom
+     */
+    public function getCupomId()
+    {
+        return $this->cupomId;
+    }
+}
