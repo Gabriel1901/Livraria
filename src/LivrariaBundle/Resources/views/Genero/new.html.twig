@@ -1,16 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Novo Genero</h1>
+    <h1>Cadastrar novo genero</h1>
 
-    {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <button type="submit" class="btn btn-success" >Salvar</button>
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('genero_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    
+            <a href="{{ path('produtos_index') }}" class="btn btn-default">Voltar a lista </a>
+        
 {% endblock %}

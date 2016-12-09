@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Generos list</h1>
+    <h1>Lista de Generos<a href="{{ path('genero_new') }}" class="btn btn-primary pull-right">Novo Genero</a></h1>
 
     <table class="table table-hover">
         <thead>
@@ -16,24 +16,17 @@
             <tr>
                 <td><a href="{{ path('genero_show', { 'id': genero.id }) }}">{{ genero.id }}</a></td>
                 <td>{{ genero.nome }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('genero_show', { 'id': genero.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('genero_edit', { 'id': genero.id }) }}">edit</a>
-                        </li>
-                    </ul>
+                <td> 
+                    <a href="{{ path('genero_show', { 'id': genero.id }) }}" class="btn btn-default">
+                        <span class="glyphicon glyphicon-eye-open"></span> </a>
+                    <a href="{{ path('genero_edit', { 'id': genero.id }) }}" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            <a href="{{ path('genero_new') }}">Create a new genero</a>
-        </li>
-    </ul>
 {% endblock %}
