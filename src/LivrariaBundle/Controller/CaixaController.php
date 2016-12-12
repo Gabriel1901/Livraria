@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use \LivrariaBundle\Entity\Cupom;
 use \LivrariaBundle\Entity\CupomItem;
+use \LivrariaBundle\Entity\Produtos;
 
 /**
  * Description of CaixaController
@@ -17,55 +18,82 @@ use \LivrariaBundle\Entity\CupomItem;
 class CaixaController extends Controller
 {
     /**
-     * @Route("/caixa")
+     * @Route("/caixa", name="caixa_index")
      */    
     public function pdvActrion(Request $request)
     {
-       $em = $this->getDoctrine()->getManager(); //carrega o doctrine
+       $cupomId = $request->getSession()->get('cupom-id', null); 
        
-       $cupom = new Cupom();
-       $cupom->setData(new \DateTime());
-       $cupom->setValorTotal(0);
-       $cupom->setVendedor(1);
-       
-       $em->persist($cupom); // segura na memoria do doctrine.
-       $em->Flush(); // grava no banco de dados.
-       
-       $request->getSession()->set('cupom-id', $cupom->getId());
+       if($cupomId === null)
+       {
+            $cupom = new Cupom();
+            $cupom->setData(new \DateTime());
+            $cupom->setValorTotal(0);
+            $cupom->setVendedor(1);
+
+            $em = $this->getDoctrine()->getManager(); //carrega o doctrine
+            $em->persist($cupom); // segura na memoria do doctrine.
+            $em->Flush(); // grava no banco de dados.
+
+            $request->getSession()->set('cupom-id', $cupom->getId());
+       }
        
        return $this->render("LivrariaBundle:Caixa:pdv.html.twig"); 
     }
     
     /**
-     * @Route("caixa/carregar")
+     * @Route("caixa/carregar", name="pesquisar_produto")
      * @Method("POST")
      */
     public function carregarProdutoAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         
-        $codProd = $reqest->request->get('codigo');
+        $codProd = $request->request->get('codigo');
         
+        
+        $cupomId = $request->getSession()->get('cupom-id');
+                
         $produto = $em->getRepository('LivrariaBundle:Produtos')
                 ->find($codProd);
         
-        if ($produto == null)
+        $cupom = $em->getRepository('LivrariaBundle:Cupom')
+                ->find($cupomId);
+        
+        $quantItem = $em->getRepository('LivrariaBundle:CupomItem')
+                ->findBy(array("cupomId" => $cupomId));
+        
+        
+        
+        
+        if ($produto instanceof Produtos)
         {
-            return $this->json('erro');
-        }    
+              
         
         $novoItem = new CupomItem();
-        $novoItem->serCupomId($request->getSession()->get('cupom-id'));
-        $novoItem->setDescricaoItem($produto-getNome);
-        $novoItem->getItemCod($codProd);
-        $novoItem->Quantidade(1);
+        $novoItem->setCupomId($cupom);
+        $novoItem->setDescricaoItem($produto->getNome());
+        $novoItem->setItemCod($codProd);
+        $novoItem->setQuantidade(1);
         $novoItem->setValorUnitario($produto->getPreco());
+        $novoItem->setOrdemItem(count($quantItem)+1);
         
         $em->persist($novoItem); // segura na memoria do doctrine.
         $em->Flush(); // grava no banco de dados.
        
-        return $this->json('ok');
+        $retorno["status"] = "ok";
+        $retorno["produto"] = $produto;
+        
+        
+        
+        }else{
+            
+            $retorno["status"] = "erro";
+            $retorno["menssagem"] = "Produto não encontrado";
+             
+        }
     
+            return $this->json($retorno);
     }
     
     /**
@@ -137,7 +165,7 @@ class CaixaController extends Controller
     }
     
     /**
-     * @Route("caixa/listar")
+     * @Route("caixa/listar", name="listagem" )
      */
     public function listarItensAction(Request $request)
     {
