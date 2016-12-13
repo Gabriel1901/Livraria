@@ -17,7 +17,7 @@
                         </span>
                             <input type="number" name="codigo" class="form-control" id="cod-produto"/>
                             <span class="input-group-btn">
-                            <button type="submit" class="btn btn-success">
+                            <button type="submit" class="btn btn-success" id="limpa">
                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
                             </span>
                         </div> 
@@ -34,7 +34,7 @@
                     </div>
                     
                 
-                        <div class="alert alert-danger" id="erro">
+                        <div class="alert alert-danger hide" id="erro">
                             Produto não encontrado
                         </div>
                     </div>    
@@ -77,8 +77,8 @@
             </div>
             
             <button type="button" class="btn btn-warning"data-toggle="modal" data-target="#modal-estorno">Estornar Item</button>
-            <button type="button" class="btn btn-danger">Cancelar Venda</button>
-            <button type="button" class="btn btn-success">Concluir Venda</button>
+            <a href="{{path('cancelar')}}" type="button" class="btn btn-danger"  id="bt-cancelar">Cancelar Venda</a>
+            <a href="{{path('concluir')}}" type="button" class="btn btn-success">Concluir Venda</a>
             
             
         </div>        
@@ -97,9 +97,9 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label>Informe o número do item:</label>
-                    <input type="text" class="form-control">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-success">Confirmar</button>
+                    <input type="text" class="form-control" id="item-estorno">
+                    <button  type="button" class="btn btn-default" data-dismiss="modal" >Cancelar</button>
+                    <button id="bt-confirmar-estorno" type="button" class="btn btn-success">Confirmar</button>
                 </div>
             </div>
               
@@ -118,10 +118,10 @@
                 
                 evento.preventDefault();
                 
-                
                 var valores = {
                     "codigo": $('#cod-produto').val()
                 };
+                
                 $.post('{{path('pesquisar_produto')}}', valores, function(retorno){
                    
                    if (retorno.status == 'ok')
@@ -144,8 +144,15 @@
                 
             });
             
+            $('#bt-confirmar-estorno').click(function(){
+                var numItem = $('#item-estorno').val();
+                
+                location.href = "/caixa/estorno/" +numItem;
+            });
+            
         });
         
+        $('#limpa').val('');
         
         function listagemProdutos()
         {
@@ -211,6 +218,7 @@
 
             return retorno;
         }
-
+        
+        
     </script>
 {% endblock %}

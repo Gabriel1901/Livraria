@@ -210,9 +210,9 @@ class CupomItem implements \JsonSerializable
         return array(
             
             "descricao" => $this->getDescricaoItem(),
-            "valor" => $this->getValorUnitario(),
-            "numOrdem" => $this->getOrdemItem(),
-            "codigo" => $this->getItemCod()
+            "valor"     => $this->getValorUnitario(),
+            "numOrdem"  => $this->getOrdemItem(),
+            "codigo"    => $this->getItemCod()
             
         );
     }
