@@ -177,4 +177,18 @@ class CaixaController extends Controller
                 ));        
         return $this->json($itens);
     }
+    
+    /**
+     * @Route("caixa/item", name="produto" )
+     */
+    public function produtoItensAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $itens = $em->getRepository("LivrariaBundle:Produto")
+                ->findBy(array(
+                    "produtoId" => $request->getSession()->get('produto-id')                    
+                ));        
+        return $this->json($itens);
+    }
 }

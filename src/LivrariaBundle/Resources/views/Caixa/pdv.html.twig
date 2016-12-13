@@ -27,10 +27,9 @@
                     
                     <div class="thumbnail hide" id="produto-detalhe">
                         <img src="http://lorempixel.com/240/240/" width="240" height="240" alt="...">
-                        <div class="caption">
-                          <h3>Nome Produto</h3>
-                          <p>Descrição do produto</p>
-                          <p>Preço Unitário: R$:123,56</p>
+                        <div class="caption" id="valor-unitario">
+                          
+                          
                         </div>
                     </div>
                     
@@ -53,13 +52,27 @@
                 </div>
                 
                 <div class="panel-body">
-                    <ol id="lista-produtos">
+                    
+                    <table class="table table-striped">
                         
-                    </ol>
+                        <thead>
+                        <th style="width:10%">List</th>
+                        <th style="width:10%">cod</th>
+                        <th style="width:70%">decrição</th>
+                        <th style="width:10%">Valor</th>
+                        </thead>
+                        <tbody id="lista-produtos">
+                            <tr>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 
-                <div class="panel-footer">
-                    Total a pagar: R$ <span id="valor-total">0,00</span>
+                <div class="panel-footer ">
+                    <div class="col-sm-6 col-md-9"></div>
+                    <div class="">Total a pagar: R$ 
+                        <span id="valor-total">0,00</span></div>
+                  
                 </div>    
             </div>
             
@@ -138,21 +151,66 @@
         {
             $('#lista-produtos').empty();
             
+            $('#valor-unitario').empty();
+            
             $.getJSON("{{path('listagem')}}", function(retorno){
                 
                var total = 0;
                
                retorno.forEach(function (el, ind){
                    
-                   var li = $('<li>' + el.codigo + ' - ' + el.descricao + ' - ' + el.valor + '</li>');
+                   var h3 = $('<h3>' + el.descricao + '</h3>'
+                                +'<p>' +el.tipo+ '</p>'
+                          +'<p>Preço Unitário: R$ ' +formataValor(el.valor)+ '</p>');
+                  
+                   $('#valor-unitario').empty();
+                   $('#valor-unitario').append(h3);
+                  
+                   
+                    
+                   
+                   var li = $('<tr>'
+                           +'<td>'  + el.numOrdem + '</td>' 
+                           +'<td>' + el.codigo + '</td>'
+                           +'<td>' + el.descricao +'</td>'
+                           +'<td>' +  formataValor(el.valor)  
+                           +'</td>'
+                           +'</tr>');
+                   
                    $('#lista-produtos').append(li);
                    
                    total += parseFloat (el.valor);
                });
                
+               $('#valor-total').html(formataValor(total));
                $('#valor-total').html(total.toFixed(2));
                
+               
+               
             });
+            
         }
+        
+                
+        
+        function formataValor(valor)
+        {
+            var partes = valor.toString().split('.');
+
+            if (partes[1] == undefined)
+            {
+                partes[1] = '00';
+            }
+
+            if (partes[1].length < 2)
+            {
+                partes[1] += '0';
+            }
+
+            var retorno = partes[0] + ',' + partes[1];
+
+            return retorno;
+        }
+
     </script>
 {% endblock %}
