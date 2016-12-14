@@ -15,7 +15,7 @@
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-barcode" aria-hidden="true"></span>
                         </span>
-                            <input type="number" name="codigo" class="form-control" id="cod-produto"/>
+                            <input type="text" name="codigo" class="form-control" id="cod-produto"/>
                             <span class="input-group-btn">
                             <button type="submit" class="btn btn-success" id="limpa">
                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
@@ -27,8 +27,10 @@
                     
                     <div class="thumbnail hide" id="produto-detalhe">
                         <img src="http://lorempixel.com/240/240/" width="240" height="240" alt="...">
-                        <div class="caption" id="valor-unitario">
-                          
+                        <div class="caption">
+                          <h3>Produtos</h3>
+                                <p> descrisção</p>
+                          <p>Preço Unitário: R$ 150,00</p>
                           
                         </div>
                     </div>
@@ -152,28 +154,18 @@
             
         });
         
-        $('#limpa').val('');
+        
         
         function listagemProdutos()
         {
             $('#lista-produtos').empty();
             
-            $('#valor-unitario').empty();
             
             $.getJSON("{{path('listagem')}}", function(retorno){
                 
                var total = 0;
                
                retorno.forEach(function (el, ind){
-                   
-                   var h3 = $('<h3>' + el.descricao + '</h3>'
-                                +'<p>' +el.tipo+ '</p>'
-                          +'<p>Preço Unitário: R$ ' +formataValor(el.valor)+ '</p>');
-                  
-                   $('#valor-unitario').empty();
-                   $('#valor-unitario').append(h3);
-                  
-                   
                     
                    
                    var li = $('<tr>'
@@ -187,18 +179,38 @@
                    $('#lista-produtos').append(li);
                    
                    total += parseFloat (el.valor);
+                   
                });
                
                $('#valor-total').html(formataValor(total));
                $('#valor-total').html(total.toFixed(2));
                
                
-               
             });
             
+            
+            $('#produto-detalhe').empty();
+               
+               $.getJSON("{{path('unitario')}}", function(retorno){
+               
+               retorno.forEach(function (el, ind){
+                    
+                  
+                   var unitario = $('<img src=" '+el.imagem+' " width="240" height="240" alt="...">'
+                                + '<div class="caption">'
+                                + '<h3> '+el.nome+' </h3>'
+                                + '<p> '+el.tipo+' </p>'
+                                + '<p>Preço Unitário: R$ '+el.preco+' </p>');
+                   
+                   $('#produto-detalhe').empty();
+                   $('#produto-detalhe').append(unitario);
+                                      
+                    });
+
+                 });            
         }
-        
-                
+           
+           
         
         function formataValor(valor)
         {

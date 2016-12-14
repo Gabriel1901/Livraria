@@ -19,6 +19,7 @@ class Produtos implements \JsonSerializable
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
+     * 
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
@@ -225,11 +226,11 @@ class Produtos implements \JsonSerializable
     public function jsonSerialize() 
     {
         return array(
-            'nome'   => $this->getNome(),
-            'tipo'   => $this->getTipo(),
-            'preco'  => $this->getPreco(),
-            'imagem' => $this->getImagem(),
-            'genero' => $this->getGenero()->getNome()
+            "nome"   => $this->getNome(),
+            "tipo"   => $this->getTipo(),
+            "preco"  => $this->getPreco(),
+            "imagem" => $this->getImagem(),
+            "genero" => $this->getGenero()->getNome()
         );
     }
 

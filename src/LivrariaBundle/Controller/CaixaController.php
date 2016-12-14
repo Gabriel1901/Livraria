@@ -214,4 +214,19 @@ class CaixaController extends Controller
         return $this->json($itens);
     }
     
+    /**
+     * @Route("caixa/listar", name="unitario" )
+     */
+    public function listarUnitarioAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $itens = $em->getRepository("LivrariaBundle:Produtos")
+                ->findBy(array(
+                    "id" => $request->getSession()->get('produtos')                    
+                ));        
+        return $this->json($itens);
+        
+    }
+    
 }
