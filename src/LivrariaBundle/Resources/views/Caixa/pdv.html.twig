@@ -132,19 +132,38 @@
                        $('#erro').addClass('hide');
                        $('#produto-detalhe').removeClass('hide');
                        
+            
+            
+            var unitario = $('<img src=" '+retorno.produto.imagem
+                       + '" width="240" height="240" alt="...">'
+                       + '<div class="caption">'
+                       + '<h3> '+retorno.produto.nome+' </h3>'
+                       + '<p> '+retorno.produto.tipo+' </p>'
+                       + '<p>Preço Unitário: R$ '+retorno.produto.preco+' </p>');         
+                   
+                   $('#produto-detalhe').empty();
+                   $('#produto-detalhe').append(unitario);
+                       
+                       
                        listagemProdutos();
                        
                    }else{
                        
                         $('#erro').removeClass('hide');
                         $('#produto-detalhe').addClass('hide');
-                       
+                        
                    }    
+                   
+                    $('#limpa').val();
                     
                     
                 });
                 
+               
+                
             });
+            
+            
             
             $('#bt-confirmar-estorno').click(function(){
                 var numItem = $('#item-estorno').val();
@@ -188,26 +207,7 @@
                
             });
             
-            
-            $('#produto-detalhe').empty();
-               
-               $.getJSON("{{path('unitario')}}", function(retorno){
-               
-               retorno.forEach(function (el, ind){
-                    
-                  
-                   var unitario = $('<img src=" '+el.imagem+' " width="240" height="240" alt="...">'
-                                + '<div class="caption">'
-                                + '<h3> '+el.nome+' </h3>'
-                                + '<p> '+el.tipo+' </p>'
-                                + '<p>Preço Unitário: R$ '+el.preco+' </p>');
-                   
-                   $('#produto-detalhe').empty();
-                   $('#produto-detalhe').append(unitario);
-                                      
-                    });
-
-                 });            
+                        
         }
            
            
