@@ -3,28 +3,30 @@
 {% block body %}
     <h1>Genero</h1>
 
-    <table class="table table-hover">
+    <table>
         <tbody>
             <tr>
-                <th>Id: </th>
-                <td> {{ genero.id }}</td>
+                <th>Id</th>
+                <td>{{ genero.id }}</td>
             </tr>
             <tr>
-                <th>Nome: </th>
-                <td> {{ genero.nome }}</td>
+                <th>Nome</th>
+                <td>{{ genero.nome }}</td>
             </tr>
         </tbody>
     </table>
 
-    
-            <a href="{{ path('genero_index') }}" class="btn btn-default">Voltar A Lista</a>
-        
-            <a href="{{ path('genero_edit', { 'id': genero.id }) }}" class="btn btn-warning">Editar</a>
-        
+    <ul>
+        <li>
+            <a href="{{ path('genero_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('genero_edit', { 'id': genero.id }) }}">Edit</a>
+        </li>
+        <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete" class="btn btn-danger" >
+                <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
-      
-            
-            
+        </li>
+    </ul>
 {% endblock %}

@@ -1,22 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Editar Produto</h1>
-    
-        
+    <h1>Produto edit</h1>
+
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        
-        <div class="form-group">
-            <button type="submit" class="btn btn-warning" >Salvar</button>
+        <input type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 
-   
-            <a href="{{ path('produtos_index') }}" class="btn btn-default">Lista de Produtos</a>
-       
+    <ul>
+        <li>
+            <a href="{{ path('produtos_index') }}">Back to the list</a>
+        </li>
+        <li>
             {{ form_start(delete_form) }}
-            <button type="submit" class="btn btn-danger">Delete</button>
+                <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
-    </div>        
-                   
+        </li>
+    </ul>
 {% endblock %}

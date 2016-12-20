@@ -5,7 +5,6 @@ namespace LivrariaBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-
 /**
  *  Description of Produtos
  *
@@ -19,23 +18,22 @@ class Produtos implements \JsonSerializable
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
-     * 
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
     
     /**
      * @ORM\Column(type="string", length=100)
-     * @Assert\NotBlank(message="É obrigatorio informar um nome para o produto. ")
+     * @Assert\NotBlank(message="É obrigatório informar um nome para o produto")
      */
     private $nome;
     
     /**
      * @ORM\Column(type="integer", length=6)
      * @Assert\NotBlank()
-     * @Assert\GreaterThan(
+     * @Assert\GreaterThanOrEqual(
      *     value = 0,
-     * message="A quantidade deve ser maior ou igual a 0. "
+     *      message="A quantidade deve ser maior ou igual a 0"
      * )
      */
     private $quantidade;
@@ -43,16 +41,12 @@ class Produtos implements \JsonSerializable
     /**
      * @ORM\Column(type="decimal", scale=2)
      * @Assert\NotBlank()
-     * @Assert\GreaterThan(
-     *     value = 0,
-     * message="O Valor deve ser maior ou igual a 0. "
-     * )
      */
     private $preco;
     
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="É obrigatorio informar um tipo para o produto. ")
+     * @Assert\NotBlank()
      */
     private $tipo;
     
@@ -64,7 +58,7 @@ class Produtos implements \JsonSerializable
      /**
      * @ORM\ManyToOne(targetEntity="Genero")
      * @ORM\JoinColumn(name="genero_id", referencedColumnName="id")
-      * @Assert\NotBlank(message="É obrigatorio informar o genero para o produto. ")
+     * @Assert\NotBlank()
      */
     private $genero;
     
@@ -223,14 +217,13 @@ class Produtos implements \JsonSerializable
         return $this->genero;
     }
     
-    public function jsonSerialize() 
-    {
+    public function jsonSerialize() {
         return array(
-            "nome"   => $this->getNome(),
-            "tipo"   => $this->getTipo(),
-            "preco"  => $this->getPreco(),
-            "imagem" => $this->getImagem(),
-            "genero" => $this->getGenero()->getNome()
+            'nome' => $this->getNome(),
+            'tipo' => $this->getTipo(),
+            'preco' => $this->getPreco(),
+            'imagem' => $this->getImagem(),
+            'genero' => $this->getGenero()->getNome()
         );
     }
 

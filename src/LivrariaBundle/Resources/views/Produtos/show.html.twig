@@ -3,64 +3,44 @@
 {% block body %}
  
     <h1>Produto</h1>
-    <div class="container">
-		<div class="card">
-			<div class="container-fliud">
-				<div class="wrapper row">
-					<div class="preview col-md-6">
-						
-						<div class="preview-pic tab-content">
-						  <div class="tab-pane active" id="pic-1"><img src="http://lorempixel.com/400/252" /></div>
-						  
-						</div>
-						<ul class="preview-thumbnail nav nav-tabs">
-						  <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="http://lorempixel.com/60/60" /></a></li>
-						  <li><a data-target="#pic-2" data-toggle="tab"><img src="http://lorempixel.com/60/60" /></a></li>
-						  <li><a data-target="#pic-3" data-toggle="tab"><img src="http://lorempixel.com/60/60" /></a></li>
-						  <li><a data-target="#pic-4" data-toggle="tab"><img src="http://lorempixel.com/60/60" /></a></li>
-						</ul>
-						
-					</div>
-					<div class="details col-md-6">
-						<h3 class="product-title">{{ produto.nome }}</h3>
-						<div class="rating">
-							<div class="stars">
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
-							</div>
-                                                    <span class="review-no"><strong>Codigo do Produto:</strong> {{ produto.id }}</span>
-                                                    <h4 class="price">Codigo do Produto: <span>{{ produto.id }}</span></h4>
-						</div>
-                                                <span class="review-no"><strong>Descrição:</strong>
-						<p class="product-description">Suspendisse quos? Tempus cras iure temporibus? Eu laudantium cubilia sem sem! Repudiandae et! Massa senectus enim minim sociosqu delectus posuere.</p>
-						<p class="vote"><strong>Quantidade: </strong>{{ produto.quantidade }}</p>
-                                                <h5 class="sizes"><strong>Preço:</strong>
-							<span class="size" data-toggle="tooltip" title="small">{{ produto.preco }}</span>
-						</h5>
-						<h5 class="colors"><strong>Tipo:</strong>
-							<span class="size" data-toggle="tooltip" title="small">{{ produto.tipo }}</span>
-						</h5>
-						
-							<a href="{{ path('produtos_index') }}" class="btn btn-default">Voltar A Lista</a>
 
-                                                        <a href="{{ path('produtos_edit', { 'id': produto.id }) }}" class="btn btn-warning">Editar</a>
-                                                        
-                                                        {{ form_start(delete_form) }}
-                                                            <input type="submit" value="Delete" class="btn btn-danger" >
-                                                        {{ form_end(delete_form) }}
-                                                        
-						
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-    
-    
-    
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ produto.id }}</td>
+            </tr>
+            <tr>
+                <th>Nome</th>
+                <td>{{ produto.nome }}</td>
+            </tr>
+            <tr>
+                <th>Quantidade</th>
+                <td>{{ produto.quantidade }}</td>
+            </tr>
+            <tr>
+                <th>Preco</th>
+                <td>{{ produto.preco }}</td>
+            </tr>
+            <tr>
+                <th>Tipo</th>
+                <td>{{ produto.tipo }}</td>
+            </tr>
+            <tr>
+                <th>Imagem</th>
+                <td>{{ produto.imagem }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+            <a href="{{ path('produtos_index') }}" class="left">Back to the list</a>
+
+            <a href="{{ path('produtos_edit', { 'id': produto.id }) }}" class="left">Edit</a>
+            <div class="left">
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete" >
+            {{ form_end(delete_form) }}
+            </div>
             
             
 {% endblock %}

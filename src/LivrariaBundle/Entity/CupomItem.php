@@ -12,7 +12,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CupomItem implements \JsonSerializable
 {
-    
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -20,33 +19,39 @@ class CupomItem implements \JsonSerializable
      */
     private $id;
     
-     /**
+    /**
+     *
      * @ORM\ManyToOne(targetEntity="Cupom")
-     * @ORM\JoinColumn(name="genero_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="cupom_id", referencedColumnName="id")
      */
     private $cupomId;
     
     /**
+     *
      * @ORM\Column(type="integer")
      */
     private $ordemItem;
-    
-    /**
-     * @ORM\Column(type="integer")
-     */    
-    private $itemCod;
 
     /**
+     *
+     * @ORM\Column(type="integer")
+     */
+    private $itemCod;
+    
+    /**
+     *
      * @ORM\Column(type="string", length=100)
      */
     private $descricaoItem;
     
     /**
+     *
      * @ORM\Column(type="integer")
      */
     private $quantidade;
     
-    /**
+     /**
+     *
      * @ORM\Column(type="decimal", scale=2)
      */
     private $valorUnitario;
@@ -64,7 +69,7 @@ class CupomItem implements \JsonSerializable
     /**
      * Set itemCod
      *
-     * @param \inteiro $itemCod
+     * @param integer $itemCod
      *
      * @return CupomItem
      */
@@ -78,7 +83,7 @@ class CupomItem implements \JsonSerializable
     /**
      * Get itemCod
      *
-     * @return \inteiro
+     * @return integer
      */
     public function getItemCod()
     {
@@ -205,15 +210,13 @@ class CupomItem implements \JsonSerializable
         return $this->ordemItem;
     }
     
-    public function jsonSerialize()
+    public function jsonSerialize() 
     {
         return array(
-            
             "descricao" => $this->getDescricaoItem(),
-            "valor"     => $this->getValorUnitario(),
-            "numOrdem"  => $this->getOrdemItem(),
-            "codigo"    => $this->getItemCod()
-            
+            "valor" => $this->getValorUnitario(),
+            "numOrdem" => $this->getOrdemItem(),
+            "codigo" => $this->getItemCod()
         );
     }
 

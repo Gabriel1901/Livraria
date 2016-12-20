@@ -5,12 +5,14 @@
 {% block body %}
     <h1>Cadastrar novo produto</h1>
 
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'novalidate': 'novalidate'} } ) }}
         {{ form_widget(form) }}
-        <button type="submit" class="btn btn-success" >Salvar</button>
+        <input type="submit" value="Create" />
     {{ form_end(form) }}
 
-    
-            <a href="{{ path('produtos_index') }}" class="btn btn-default">Voltar a lista </a>
-        
+    <ul>
+        <li>
+            <a href="{{ path('produtos_index') }}">Back to the list</a>
+        </li>
+    </ul>
 {% endblock %}

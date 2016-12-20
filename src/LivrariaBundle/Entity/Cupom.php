@@ -14,35 +14,36 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Cupom 
 {
-    
     /**
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id; 
+    private $id;
     
     /**
+     *
      * @ORM\Column(type="datetime")
      */
     private $data;
     
     /**
+     *
      * @ORM\Column(type="integer")
      */
     private $vendedor;
     
     /**
+     *
      * @ORM\Column(type="decimal", scale=2)
      */
     private $valorTotal;
     
     /**
      *
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string") 
      */
     private $status = "NOVO";
-    
 
     /**
      * Get id
